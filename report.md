@@ -6,11 +6,16 @@ There are two common ways to document a project:
 A README file usually consists of:
 *	Project name
 *	Description: Include what your project does exactly and the importance of it. Project description should be clear, short and on point.  
+![Alternate image text](http://s12.picofile.com/file/8403931068/Annotation_2020_07_25_193618.png)
 *	Table of contents: Optional. Works as a general overview and a quick navigation on a lengthy file 
+![Alternate image text](http://s13.picofile.com/file/8403931042/Annotation_2020_07_25_193613.png)
 *	Installation: Explain how to install the project. Optionally include a gif for better understanding.
 *	Contribution: Could be another file. Include contribution guidelines and instructions.  
+![Alternate image text](http://s13.picofile.com/file/8403931018/Annotation_2020_07_25_193605.png)
 *	Versioning 
+![Alternate image text](http://s12.picofile.com/file/8403930976/Annotation_2020_07_25_193552.png)
 *	Documentation 
+![Alternate image text](http://s12.picofile.com/file/8403930992/Annotation_2020_07_25_193559.png)
 *	Credit
 *	License
 And  a lot more if needed.
