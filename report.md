@@ -56,3 +56,12 @@ Integrate | Pull request | Merge with feature branches
 Review | After pull request they have discussion and if the code is mature enough the owner merges it | Full source code review
 application | Open source projects, junior developers, stablished product | iterate quickly, Senior developers only, Early stages
 
+## Semantic Versioning
+In systems with many dependencies, either may dependencies are too tight and the project is in danger of _version lock_, which means being unable to upgrade without realeasing new version of each package, or dependencies may be too loose in which case the project is in danger of _version promiscuity_, which means assuming compaitbility with more versions in future than necessary. 
+As a solution, we use semantic versioning. For semantic versioning first declare a public API. It can be a strict documentation or implemented in code. Then move foreward with Major.Minor.Patch structure. Start with 0.1.0 which is not a stable version and implies early stage of development. For every incompatible API change increment the Major part, for every new functionality in backward compatible manner increment Minor part and for every backward compatible bugfix increment Patch part of the structure.
+
+## Conventions in commit messages
+![Alternate image text](http://s12.picofile.com/file/8403932318/hi.png)
+
+Commits should be consistent and concise. A team should have a guidline for style, content and use of metadata (use of issue tracking IDs and pull request numbers as reference) in a commit to ensure consistency. 
+
