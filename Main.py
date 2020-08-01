@@ -8,23 +8,11 @@ def regex_validation(email):
     return re.search(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)", email)
 
 
-def smtp_validation(email):
-    # Extract domain
-    domain = email.split('@')[-1]
-
-    # Find the prior mail server
-    answer = dns.resolver.resolve(domain, 'MX')
-    records = []
-    for rec in answer:
-        records.append(rec)
-    records.sort(key=lambda r: r.preference, reverse=False)
-    mx_report = str(records[0].exchange)[:-1]
-
-    print(mx_report)
+def smtp_ping(mx_host):
     # Connect to the mx host
     server = smtplib.SMTP(port=25)
     server.set_debuglevel(0)
-    server.connect(mx_report)
+    server.connect(mx_host)
 
     # Identify sender server and email address
     host = socket.gethostname()
@@ -41,6 +29,20 @@ def smtp_validation(email):
         return True
     else:
         return False
+
+
+def smtp_validation(email):
+    # Extract domain
+    domain = email.split('@')[-1]
+
+    # Find the prior mail server
+    mx_report = dns.resolver.resolve(domain, 'MX')
+    records = []
+    for rec in mx_report:
+        records.append(rec)
+
+    records.sort(key=lambda r: r.preference, reverse=False)
+    mx_host = str(records[0].exchange)[:-1]
 
 
 if __name__ == '__main__':
