@@ -16,12 +16,12 @@ def smtp_ping(mx_host):
 
     # Identify sender server and email address
     host = socket.gethostname()
-    server.helo(host)gi
+    server.helo(host)
     server.mail('ghazalnoroozi27@gmail.com')
 
     # Identify the recipient email address
     code, message = server.rcpt(email)
-    print(message, code)
+    # print(message, code)
     server.quit()
 
     # Check if the email address was valid
@@ -32,17 +32,32 @@ def smtp_ping(mx_host):
 
 
 def smtp_validation(email):
+
     # Extract domain
     domain = email.split('@')[-1]
+    is_valid = False
 
     # Find the prior mail server
-    mx_report = dns.resolver.resolve(domain, 'MX')
-    records = []
-    for rec in mx_report:
-        records.append(rec)
+    try:
+        mx_report = dns.resolver.resolve(domain, 'MX')
+        records = []
+        for rec in mx_report:
+            records.append(rec)
+    except Exception:
+        return False
 
     records.sort(key=lambda r: r.preference, reverse=False)
-    mx_host = str(records[0].exchange)[:-1]
+    for rec in records:
+        try:
+            is_valid = smtp_ping(str(rec.exchange)[:-1])
+            break
+        except TimeoutError:
+            print("Something went wrong. Check port 25. It might be blocked.")
+            exit(-1)
+        except Exception:
+            continue
+
+    return is_valid
 
 
 if __name__ == '__main__':
