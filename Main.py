@@ -16,7 +16,7 @@ def smtp_ping(mx_host):
 
     # Identify sender server and email address
     host = socket.gethostname()
-    server.helo(host)
+    server.helo(host)gi
     server.mail('ghazalnoroozi27@gmail.com')
 
     # Identify the recipient email address
