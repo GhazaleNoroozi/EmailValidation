@@ -10,6 +10,14 @@ def regex_validation(email):
 
 
 def smtp_ping(mx_host, email):
+    """Initiate a SMTP conversation with the host to see if the email is valid
+
+    :param mx_host: the mail server
+    :type mx_host: basestring
+    :param email: the email
+    :type email: basestring
+    :return: a bool indicating whether the email is valid
+    """
     print("host", mx_host)
     # Connect to the mx host
     server = smtplib.SMTP(port=25)
@@ -34,7 +42,12 @@ def smtp_ping(mx_host, email):
 
 
 def smtp_validation(email):
+    """Validate the email address
 
+    :param email: the email address
+    :type email: string
+    :return: a bool indicating whether the email is valid
+    """
     # Extract domain
     domain = email.split('@')[-1]
     is_valid = False
@@ -65,6 +78,7 @@ def smtp_validation(email):
 
 
 def main():
+    """Main method"""
     email = input()
     if regex_validation(email) and smtp_validation(email):
         print("Email was valid")
