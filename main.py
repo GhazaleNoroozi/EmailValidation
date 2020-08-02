@@ -5,10 +5,10 @@ import socket
 
 
 def regex_validation(email):
-    return re.search(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)", email)
+    return re.search(r'(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)', email)
 
 
-def smtp_ping(mx_host):
+def smtp_ping(mx_host, email):
     # Connect to the mx host
     server = smtplib.SMTP(port=25)
     server.set_debuglevel(0)
@@ -49,7 +49,7 @@ def smtp_validation(email):
     records.sort(key=lambda r: r.preference, reverse=False)
     for rec in records:
         try:
-            is_valid = smtp_ping(str(rec.exchange)[:-1])
+            is_valid = smtp_ping(str(rec.exchange, email)[:-1], email)
             break
         except TimeoutError:
             print("Something went wrong. Check port 25. It might be blocked.")
@@ -60,9 +60,13 @@ def smtp_validation(email):
     return is_valid
 
 
-if __name__ == '__main__':
+def main():
     email = input()
     if regex_validation(email) and smtp_validation(email):
         print("Email was valid")
     else:
         print("Email was not valid")
+
+
+if __name__ == '__main__':
+    main()
