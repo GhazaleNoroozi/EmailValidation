@@ -5,10 +5,12 @@ import socket
 
 
 def regex_validation(email):
-    return re.search(r'(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)', email)
+    """Match the email with a regex and return a boolean."""
+    return bool(re.search(r'(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)', email))
 
 
 def smtp_ping(mx_host, email):
+    print("host", mx_host)
     # Connect to the mx host
     server = smtplib.SMTP(port=25)
     server.set_debuglevel(0)
@@ -17,7 +19,7 @@ def smtp_ping(mx_host, email):
     # Identify sender server and email address
     host = socket.gethostname()
     server.helo(host)
-    server.mail('ghazalnoroozi27@gmail.com')
+    server.mail('name@domain.com')
 
     # Identify the recipient email address
     code, message = server.rcpt(email)
@@ -49,12 +51,14 @@ def smtp_validation(email):
     records.sort(key=lambda r: r.preference, reverse=False)
     for rec in records:
         try:
-            is_valid = smtp_ping(str(rec.exchange, email)[:-1], email)
+            is_valid = smtp_ping(str(rec.exchange)[:-1], email)
+            print(is_valid)
             break
         except TimeoutError:
             print("Something went wrong. Check port 25. It might be blocked.")
             exit(-1)
-        except Exception:
+        except Exception as e:
+            # print("Exception: ", e)
             continue
 
     return is_valid
