@@ -27,11 +27,12 @@ def smtp_ping(mx_host, email):
     # Identify sender server and email address
     host = socket.gethostname()
     server.helo(host)
-    server.mail('name@domain.com')
+    server.mail('ghazalnoroozi27@aut.ac.ir')
 
     # Identify the recipient email address
     code, message = server.rcpt(email)
     # print(message, code)
+    print(code)
     server.quit()
 
     # Check if the email address was valid
@@ -71,7 +72,7 @@ def smtp_validation(email):
             print("Something went wrong. Check port 25. It might be blocked.")
             exit(-1)
         except Exception as e:
-            # print("Exception: ", e)
+            print("Exception: ", e)
             continue
 
     return is_valid
@@ -80,6 +81,7 @@ def smtp_validation(email):
 def main():
     """Main method"""
     email = input()
+    # smtp_validation("a.kam@aut.ac.ir")
     if regex_validation(email) and smtp_validation(email):
         print("Email was valid")
     else:
