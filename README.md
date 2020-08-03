@@ -10,23 +10,7 @@ Python 3 is needed to run this project. Run the command below to insure you have
 Python 3.7.3
 ```
 
-### Installing
-
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
+g
 
 ## Running the tests
 
@@ -38,4 +22,4 @@ python -m unittest tests/test.py
 ```
 ## Authors
 
-* **Ghazaleh Noroozi** - *??????* - [GhazaleNoroozi](https://github.com/GhazaleNoroozi)
+* **Ghazaleh Noroozi** - [GhazaleNoroozi](https://github.com/GhazaleNoroozi)
