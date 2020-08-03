@@ -1,5 +1,3 @@
 #! /bin/bash
-source name_Env/bin/activate
-# virtualenv is now active.
-#
+source venv/bin/activate
 python src/main.py
