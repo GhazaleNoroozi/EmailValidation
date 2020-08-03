@@ -20,19 +20,18 @@ def smtp_ping(mx_host, email):
     """
     print("host", mx_host)
     # Connect to the mx host
-    server = smtplib.SMTP(port=25)
+    server = smtplib.SMTP()
     server.set_debuglevel(0)
     server.connect(mx_host)
 
     # Identify sender server and email address
     host = socket.gethostname()
     server.helo(host)
-    server.mail('ghazalnoroozi27@aut.ac.ir')
+    server.mail('email@domain.com')
 
     # Identify the recipient email address
     code, message = server.rcpt(email)
-    # print(message, code)
-    print(code)
+    print(message, code)
     server.quit()
 
     # Check if the email address was valid
@@ -56,23 +55,23 @@ def smtp_validation(email):
     # Find the prior mail server
     try:
         mx_report = dns.resolver.resolve(domain, 'MX')
-        records = []
-        for rec in mx_report:
-            records.append(rec)
-    except Exception:
+    except dns.exception.DNSException:
         return False
+
+    records = []
+    for rec in mx_report:
+        records.append(rec)
 
     records.sort(key=lambda r: r.preference, reverse=False)
     for rec in records:
         try:
             is_valid = smtp_ping(str(rec.exchange)[:-1], email)
-            print(is_valid)
             break
         except TimeoutError:
-            print("Something went wrong. Check port 25. It might be blocked.")
+            print("Connection time out. Check port 25. It might be blocked.")
             exit(-1)
         except Exception as e:
-            print("Exception: ", e)
+            # print("Exception: ", e)
             continue
 
     return is_valid
@@ -81,7 +80,6 @@ def smtp_validation(email):
 def main():
     """Main method"""
     email = input()
-    # smtp_validation("a.kam@aut.ac.ir")
     if regex_validation(email) and smtp_validation(email):
         print("Email was valid")
     else:
