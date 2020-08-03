@@ -10,14 +10,13 @@ Python 3 is needed to run this project. Run the command below to insure you have
 Python 3.7.3
 ```
 
-g
+###installing
+Use [isntall.sh](https://github.com/GhazaleNoroozi/EmailValidation/blob/master/install.sh) file on linux.
 
 ## Running the tests
 
-Run tests with command below:
-
+For running the tests cd in the project directory and run command below:
 ```
-#cd to the project directory
 python -m unittest tests/test.py
 ```
 ## Authors
